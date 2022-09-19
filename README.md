@@ -12,3 +12,4 @@
 ・scripts/horse.pyの実行
 
 ## scripts/horse.py
+・opencvを用いたライントレース走行
