@@ -14,7 +14,24 @@ class Horse:
 
     def image_callback(self, msg):
         image = self.bridge.imgmsg_to_cv2(msg, desired_encoding = 'bgr8') # Passing Image to OpenCV
-        image = cv.resize(image, (image.shape[1]//2, image.shape[0]//2)) # resize Image
+
+        hsv = cv.cvColor(image, cv.COLORO_BGR2HSV) # change BGR to HSV
+        lower_yellow = np.array([10, 10, 10]) # lower limit
+        upper_yellow = np.array([255, 255, 255]) # upper limit
+        mask = cv.inRange(hsv, lower_yellow, upper_yellow) # binarization
+        masked = cv.bitwise_and(image, image, mask = mask) # filtering(leave mask's part of 1)
+
+        h, w = image.shape[:2]
+        RESIZE = (w//3, h//3)
+        search_top = (h//4)*3
+        search_bot = search_top + 20
+        mask[0:search_top, 0:w] = 0
+        mask[search_bot:h, 0:h] = 0
+
+        M = cv.moments(mask)
+        if M['m00'] > 0:
+            cx = int(M['m10']/M['m00']) #
+
         cv.imshow('MASK', image) #
         cv.waitkey(3) # wait 3ms
 
