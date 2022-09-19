@@ -1,0 +1,6 @@
+<launch>
+    <node pkg="keiba" type="horse.py" name="horse">
+        <remap from="/beego/my_robo/camera1/image_row" to="/camera/image_row" />
+    </node>
+</launch>
+
