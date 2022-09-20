@@ -1,7 +1,7 @@
 # keiba
 
 ## launch
-### samplec_course.launch
+### sample_course.launch
 ・sample courseの起動
 
 ### beego.launch
