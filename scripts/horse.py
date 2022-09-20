@@ -20,17 +20,17 @@ class Horse:
         image = self.bridge.imgmsg_to_cv2(msg, desired_encoding = 'bgr8') # Passing Image to OpenCV
 
         hsv = cv.cvtColor(image, cv.COLOR_BGR2HSV) # change BGR to HSV
-        lower_yellow = np.array([10, 10, 10]) # lower limit
-        upper_yellow = np.array([255, 255, 255]) # upper limit
-        mask = cv.inRange(hsv, lower_yellow, upper_yellow) # binarization
+        lower = np.array([0, 0, 0]) # lower limit
+        upper = np.array([255, 100, 100]) # upper limit
+        mask = cv.inRange(hsv, lower, upper) # binarization
         masked = cv.bitwise_and(image, image, mask = mask) # filtering(leave mask's part of 1)
 
         h, w = image.shape[:2]
         RESIZE = (w//3, h//3)
-        search_top = (h//4)*3
-        search_bot = search_top + 20
+        search_top = (h//6)*5
+        search_bot = search_top + 15
         mask[0:search_top, 0:w] = 0
-        mask[search_bot:h, 0:h] = 0
+        mask[search_bot:h, 0:w] = 0
 
         M = cv.moments(mask) # centroid of part 1 in mask
         if M['m00'] > 0: # if exist centroid
@@ -40,7 +40,7 @@ class Horse:
         
             # P control
             err = cx - w//2 # difference between centroid x and center of image x 
-            self.twist.linear.x = 0.4
+            self.twist.linear.x = 0.2
             self.twist.angular.z = -float(err)/800
             self.cmd_vel_pub.publish(self.twist)
 
