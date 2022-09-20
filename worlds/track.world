@@ -50,12 +50,12 @@
         <visual name="ground_vis">
           <geometry>
             <box>
-              <size>1.5 4 .1</size>
+              <size>10 10 .1</size>
             </box>
           </geometry>
           <material>
             <script>
-              <uri>model://solo_sample/materials/solo_sample.material</uri>
+              <uri>model://track/materials/track.material</uri>
               <name>course</name>
             </script>
           </material>

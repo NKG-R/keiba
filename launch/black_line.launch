@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <launch>
   <include file="$(find gazebo_ros)/launch/empty_world.launch">
-    <arg name="world_name" value="$(find keiba)/worlds/sample_solo.world"/>
+    <arg name="world_name" value="$(find keiba)/worlds/black_line.world"/>
     <arg name="debug" value="false" />
     <arg name="gui" value="true" />
     <arg name="paused" value="false"/>

@@ -10,7 +10,7 @@
       <param name="tf_prefix" value="$(arg ns)"/>
     </node>
 
-    <rosparam file="$(find beego_gazebo)/config/controller.yaml" command="load"/>
+    <rosparam file="$(find keiba)/config/controller.yaml" command="load"/>
     <param name="diff_drive_controller/base_frame_id" value="$(arg ns)/base_footprint"/> <!-- default: base_link -->
     <param name="diff_drive_controller/odom_frame_id" value="$(arg ns)/odom"/> <!-- default: odom -->
   </group>

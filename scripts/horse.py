@@ -40,7 +40,7 @@ class Horse:
         
             # P control
             err = cx - w//2 # difference between centroid x and center of image x 
-            self.twist.linear.x = 0.2
+            self.twist.linear.x = 0.6
             self.twist.angular.z = -float(err)/800
             self.cmd_vel_pub.publish(self.twist)
 

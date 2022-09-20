@@ -8,7 +8,7 @@ material course
       ambient 1.0 1.0 1.0 1.0
       texture_unit
       {
-        texture solo_sample.png
+        texture black_line.png
       }
     }
   }
