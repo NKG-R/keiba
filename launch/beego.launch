@@ -1,5 +1,6 @@
 <?xml version="1.0"?>
 <launch>
+  <!-- black_line
   <arg name="x" default="0.82"/>
   <arg name="y" default="0.3"/>
   <arg name="z" default="0.0"/>
@@ -7,19 +8,30 @@
   <arg name="P" default="0.0"/>
   <arg name="Y" default="1.570796327"/>
   <arg name="ns" default="beego"/>
+  <arg name="rviz" default="true"/> -->
+
+  <!-- track -->
+  <arg name="x" default="0.0"/>
+  <arg name="y" default="-0.9"/>
+  <arg name="z" default="0.0"/>
+  <arg name="R" default="0.0"/>
+  <arg name="P" default="0.0"/>
+  <arg name="Y" default="0.0"/>
+  <arg name="ns" default="beego"/>
   <arg name="rviz" default="true"/>
+
 
   <group ns="$(arg ns)">
     <param name="robot_description" command="$(find xacro)/xacro.py $(find keiba)/urdf/beego.urdf --inorder"/>
     <node name="spawn_model" pkg="gazebo_ros" type="spawn_model" respawn="false" output="screen" args="-urdf -model $(arg ns) -param robot_description -x $(arg x) -y $(arg y) -z $(arg z) -R $(arg R) -P $(arg P) -Y $(arg Y)" />
   </group>
   
-  <include file="$(find beego_gazebo)/launch/control.launch">
+  <include file="$(find keiba)/launch/control.launch">
     <arg name="ns" value="$(arg ns)"/>
   </include>
 
   <group if="$(arg rviz)">
-    <node name="rviz" pkg="rviz" type="rviz" args="-d $(find beego_gazebo)/rviz/beego.rviz"/>
+    <node name="rviz" pkg="rviz" type="rviz" args="-d $(find keiba)/rviz/beego.rviz"/>
   </group>
 
 </launch>
