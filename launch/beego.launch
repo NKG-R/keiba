@@ -18,11 +18,11 @@
   <arg name="P" default="0.0"/>
   <arg name="Y" default="0.0"/>
   <arg name="ns" default="beego"/>
-  <arg name="rviz" default="true"/>
+  <arg name="rviz" default="false"/>
 
 
   <group ns="$(arg ns)">
-    <param name="robot_description" command="$(find xacro)/xacro.py $(find keiba)/urdf/beego.urdf --inorder"/>
+    <param name="robot_description" command="$(find xacro)/xacro $(find keiba)/urdf/beego.urdf --inorder"/>
     <node name="spawn_model" pkg="gazebo_ros" type="spawn_model" respawn="false" output="screen" args="-urdf -model $(arg ns) -param robot_description -x $(arg x) -y $(arg y) -z $(arg z) -R $(arg R) -P $(arg P) -Y $(arg Y)" />
   </group>
   

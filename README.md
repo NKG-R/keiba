@@ -1,8 +1,8 @@
 # keiba
 
 ## launch
-### sample_course.launch
-・sample courseの起動
+### track.launch
+・白黒フィールドの起動
 
 ### beego.launch
 ・シミュレーション上で動かすbeegoの起動

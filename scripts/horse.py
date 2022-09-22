@@ -4,6 +4,7 @@ from sensor_msgs.msg import Image
 import cv2 as cv
 import numpy as np
 from geometry_msgs.msg import Twist
+import random
 
 class Horse:
     def __init__(self):
@@ -14,7 +15,12 @@ class Horse:
         self.image_sub = rospy.Subscriber('/beego/my_robo/camera1/image_raw', Image, self.image_callback) # Image Subscriber
         self.cmd_vel_pub = rospy.Publisher('/beego/diff_drive_controller/cmd_vel', Twist, queue_size=1) # cmd_vel Publisher
 
+        self.speed = random.uniform(0.6, 1.5)
+        self.kp = random.uniform(500, 1000)
         self.twist = Twist()
+
+        print(self.speed)
+        print(self.kp)
 
     def image_callback(self, msg):
         image = self.bridge.imgmsg_to_cv2(msg, desired_encoding = 'bgr8') # Passing Image to OpenCV
@@ -40,8 +46,8 @@ class Horse:
         
             # P control
             err = cx - w//2 # difference between centroid x and center of image x 
-            self.twist.linear.x = 0.6
-            self.twist.angular.z = -float(err)/800
+            self.twist.linear.x = self.speed
+            self.twist.angular.z = -float(err)/self.kp
             self.cmd_vel_pub.publish(self.twist)
 
         # resize

@@ -1,4 +1,4 @@
 <launch>
-    <node pkg="keiba" type="horse.py" name="horse" />
+    <node pkg="keiba" type="horse.py" name="horse" output="screen"/>
 </launch>
 
