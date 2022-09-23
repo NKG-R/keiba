@@ -15,10 +15,16 @@ class Horse:
         self.image_sub = rospy.Subscriber('/beego/my_robo/camera1/image_raw', Image, self.image_callback) # Image Subscriber
         self.cmd_vel_pub = rospy.Publisher('/beego/diff_drive_controller/cmd_vel', Twist, queue_size=1) # cmd_vel Publisher
 
+        self.max_speed = random.uniform(0.8, 1.5)
+        self.min_speed = random.uniform(0.0, 0.4)
         self.speed = random.uniform(0.6, 1.5)
         self.kp = random.uniform(500, 1000)
+        self.cnt = 0
+
         self.twist = Twist()
 
+        print(self.max_speed)
+        print(self.min_speed)
         print(self.speed)
         print(self.kp)
 
@@ -46,9 +52,21 @@ class Horse:
         
             # P control
             err = cx - w//2 # difference between centroid x and center of image x 
+            
+            if self.cnt > 100:
+                self.speed = random.uniform(0.0, 1.5)
+                if self.speed > self.max_speed:
+                    self.speed = self.max_speed
+                elif self.speed < self.min_speed:
+                    self.speed = self.min_speed
+                print(self.speed)
+                self.cnt = 0
+
             self.twist.linear.x = self.speed
             self.twist.angular.z = -float(err)/self.kp
             self.cmd_vel_pub.publish(self.twist)
+            self.cnt = self.cnt + 1
+            print(self.cnt)
 
         # resize
         display_mask = cv.resize(mask, RESIZE)
