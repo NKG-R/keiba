@@ -12,8 +12,8 @@ class Horse:
         cv.namedWindow('BGR Image', 1) # create window named BGR Image
         cv.namedWindow('MASK', 1) # create window named MASK
         cv.namedWindow('MASKED', 1) # create window named MASKED
-        self.image_sub = rospy.Subscriber('/beego/my_robo/camera1/image_raw', Image, self.image_callback) # Image Subscriber
-        self.cmd_vel_pub = rospy.Publisher('/beego/diff_drive_controller/cmd_vel', Twist, queue_size=1) # cmd_vel Publisher
+        self.image_sub = rospy.Subscriber('my_robo/camera1/image_raw', Image, self.image_callback) # Image Subscriber
+        self.cmd_vel_pub = rospy.Publisher('diff_drive_controller/cmd_vel', Twist, queue_size=1) # cmd_vel Publisher
 
         self.speed = random.uniform(0.6, 1.5)
         self.kp = random.uniform(500, 1000)

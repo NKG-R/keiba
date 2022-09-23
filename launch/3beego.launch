@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<launch>
+
+  <include file="$(find keiba)/launch/beego.launch">
+    <arg name="ns" value="horse1"/>
+    <arg name="y" default="-2.6"/>
+  </include>
+
+  <include file="$(find keiba)/launch/beego.launch">
+    <arg name="ns" value="horse2"/>
+    <arg name="y" default="-2.95"/>
+  </include>
+
+  <include file="$(find keiba)/launch/beego.launch">
+    <arg name="ns" value="horse3"/>
+    <arg name="y" default="-3.3"/>
+  </include>
+
+</launch>

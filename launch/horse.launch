@@ -1,4 +1,12 @@
 <launch>
-    <node pkg="keiba" type="horse.py" name="horse" output="screen"/>
+    <group ns="horse1">
+      <node pkg="keiba" type="horse.py" name="horse1" output="screen"/>
+    </group>
+    <group ns="horse2">
+      <node pkg="keiba" type="horse.py" name="horse2" output="screen"/>
+    </group>
+    <group ns="horse3">
+      <node pkg="keiba" type="horse.py" name="horse3" output="screen"/>
+    </group>
 </launch>
 
